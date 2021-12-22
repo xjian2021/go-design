@@ -1,4 +1,4 @@
-package easy_factory_method
+package easy_factory
 
 import "fmt"
 
