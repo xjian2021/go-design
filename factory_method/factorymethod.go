@@ -19,14 +19,6 @@ type People interface {
 	UniqueFunction
 }
 
-type PeopleFactory interface {
-	Create(bodySize string, handNum int) People
-}
-
-func CreateFactory(f PeopleFactory, bodySize string, handNum int) People {
-	return f.Create(bodySize, handNum)
-}
-
 type Basis struct {
 	handNum  int
 	bodySize string
