@@ -2,96 +2,62 @@ package abstract_factory
 
 import "fmt"
 
-const (
-	CAT_TYPE FactoryType = iota
-	DOG_TUPE
-)
-
-type FactoryType int
-
-type BasisActionsInterface interface {
-	Run()
-	Jump()
+type ParentsInterface interface {
+	GoToWork()
 }
 
-type SpecialActionsInterface interface {
-	DoSomething()
+type SonInterface interface {
+	Study()
 }
 
-type ActionsSet interface {
-	BasisActionsInterface
-	SpecialActionsInterface
+//HomeFactory 抽象工厂模式
+//把一系列工厂之间相关的关系进行抽象则为抽象工厂模式
+//抽象工厂模式是在产品间存在联系或者关系时才需要，如果是一些相互独立的产品则无需使用抽象工厂模式
+type HomeFactory interface {
+	CreateParents() ParentsInterface
+	CreateSon() SonInterface
 }
 
-//ActionsFactory 行为抽象模式工厂接口
-type ActionsFactory interface {
-	CreateActions(name string) ActionsSet
+type JJHome struct {}
+
+func (j *JJHome) CreateParents() ParentsInterface {
+	return &JJParents{}
 }
 
-//GetActionsSet 方式一
-//利用抽象工厂模式获取自定义的对象工厂
-//优点在于在需要新增业务类型时，只要实现接口即可使用(易于扩展)
-func GetActionsSet(af ActionsFactory, name string) ActionsSet {
-	return af.CreateActions(name)
+func (j *JJHome) CreateSon() SonInterface {
+	return &JJ{}
 }
 
-//GetActionsSet2 方式二
-//给每种工厂定义标识，在使用时只需要传入标识即可(易于使用)
-//优点在于使用者不会直接与具体类型进行互动，而是依靠该构造函数来创建接口的实例，仅使用标识参数来控制生产
-func GetActionsSet2(ftype FactoryType, name string) ActionsSet {
-	switch ftype {
-	case CAT_TYPE:
-		return (&CatActions{}).CreateActions(name)
-	case DOG_TUPE:
-		return (&DogActions{}).CreateActions(name)
-	}
-	return nil
+type JJParents struct {}
+
+func (j *JJParents) GoToWork() {
+	fmt.Printf("jj 父母去工作\n")
 }
 
-type BasisActions struct {
-	ObjectName string
+type JJ struct {}
+
+func (j *JJ) Study() {
+	fmt.Printf("jj 去学习\n")
 }
 
-func (b *BasisActions) Run() {
-	fmt.Printf("%s run\n", b.ObjectName)
+type XjianHome struct {}
+
+func (x *XjianHome) CreateParents() ParentsInterface {
+	return &XjianParents{}
 }
 
-func (b *BasisActions) Jump() {
-	fmt.Printf("%s jump\n", b.ObjectName)
+func (x *XjianHome) CreateSon() SonInterface {
+	return &Xjian{}
 }
 
-type CatActions struct{}
+type XjianParents struct {}
 
-func (c *CatActions) CreateActions(name string) ActionsSet {
-	return &Cat{
-		&BasisActions{
-			ObjectName: name,
-		},
-	}
+func (x *XjianParents) GoToWork() {
+	fmt.Printf("Xjian 父母去工作\n")
 }
 
-type Cat struct {
-	*BasisActions
-}
+type Xjian struct {}
 
-func (c *Cat) DoSomething() {
-	fmt.Printf("%s sleep\n", c.ObjectName)
-}
-
-type DogActions struct{}
-
-func (c *DogActions) CreateActions(name string) ActionsSet {
-	return &Dog{
-		&BasisActions{
-			ObjectName: name,
-		},
-	}
-}
-
-type Dog struct {
-	*BasisActions
-}
-
-func (c *Dog) DoSomething() {
-	fmt.Printf("%s play\n", c.ObjectName)
+func (x *Xjian) Study() {
+	fmt.Printf("Xjian 去学习\n")
 }
