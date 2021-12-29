@@ -1,7 +1,10 @@
 package prototype
 
+import "fmt"
+
 //Prototype 原型接口
 type Prototype interface {
+	DoSomething()
 	Clone() Prototype
 }
 
@@ -34,12 +37,20 @@ func (c *Cat) Name() string {
 	return c.name
 }
 
+func (c *Cat) DoSomething() {
+	fmt.Println("i am cat")
+}
+
 func (c *Cat) Clone() Prototype {
 	return &Cat{name: c.name}
 }
 
 type Dog struct {
 	Age uint8
+}
+
+func (d *Dog) DoSomething() {
+	fmt.Println("i am dog")
 }
 
 func (d *Dog) Clone() Prototype {
