@@ -1,3 +1,3 @@
-module github.com/784093680/go-design
+module github.com/xjian2021/go-design
 
 go 1.15
