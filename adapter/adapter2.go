@@ -53,7 +53,7 @@ type roundPeg struct {
 	radius float64
 }
 
-func NewRoundPeg(radius float64) *roundPeg {
+func NewRoundPeg(radius float64) RoundPeg {
 	return &roundPeg{radius: radius}
 }
 
@@ -65,7 +65,7 @@ type squarePeg struct {
 	width float64
 }
 
-func NewSquarePeg(width float64) *squarePeg {
+func NewSquarePeg(width float64) SquarePeg {
 	return &squarePeg{width: width}
 }
 
