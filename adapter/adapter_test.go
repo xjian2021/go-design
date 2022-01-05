@@ -3,8 +3,8 @@ package adapter
 import "testing"
 
 func TestOSAdapter(t *testing.T) {
-	m := NewMac()
-	t.Log(m.FileType())
+	m := NewMac("cmd")
+	t.Logf("mac file :%s",m.MacFile())
 	win := NewWindowsOS(m)
-	t.Log(win.File())
+	t.Logf("windows file :%s",win.WinFile())
 }

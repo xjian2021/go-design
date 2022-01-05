@@ -1,32 +1,34 @@
 package adapter
 
-type OSAdapter interface {
-	File() string
+type MacOSAdapter interface {
+	WinFile() string
 }
 
 type MacOS interface {
-	FileType() string
+	MacFile() string
 }
 
-type mac struct {}
-
-func NewMac() *mac {
-	return &mac{}
+type mac struct {
+	name string
 }
 
-func (m *mac) FileType() string {
-	return "main"
+func NewMac(name string) MacOS {
+	return &mac{name}
+}
+
+func (m *mac) MacFile() string {
+	return m.name
 }
 
 type windowsOS struct {
 	MacOS
 }
 
-func NewWindowsOS(macOS MacOS) *windowsOS {
+func NewWindowsOS(macOS MacOS) MacOSAdapter {
 	return &windowsOS{MacOS: macOS}
 }
 
-func (O *windowsOS) File() string {
-	return O.FileType() + " -> " + "main.exe"
+func (O *windowsOS) WinFile() string {
+	return O.MacFile() + ".exe"
 }
 
