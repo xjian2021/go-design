@@ -1,5 +1,5 @@
 # **go-design**
-使用golang实现各种设计模式并总结体会
+使用golang实现各种设计模式并总结体会。还有一些在leetcode刷题的答案，目前从简单题开始刷起。
 
 ## [单例模式](https://github.com/xjian2021/go-design/tree/main/singleton)
 `创建型设计模式`， 让你能够保证一个类只有一个实例， 并提供一个访问该实例的全局节点。
@@ -24,3 +24,5 @@
   - 使用克隆的方式来生成新的对象，避免反复运行初始化代码
 - 缺点
   - 原型需要对被复制对象进行复杂的初始化，复杂程度取决于对象类型的复杂程度。
+  
+## [适配器模式](https://github.com/xjian2021/go-design/tree/main/adapter)
