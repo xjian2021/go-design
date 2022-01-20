@@ -19,5 +19,5 @@ func SliceToListNode(s []int) *ListNode {
 		//tmp.Next = &ListNode{}
 		tmp = tmp.Next
 	}
-	return ln
+	return ln.Next
 }

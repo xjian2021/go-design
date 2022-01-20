@@ -10,6 +10,7 @@ func NewTreeNode(val int, left *TreeNode, right *TreeNode) *TreeNode {
 	return &TreeNode{Val: val, Left: left, Right: right}
 }
 
+// TODO
 //SliceToTreeNode 前序遍历
 func SliceToTreeNode(s []int) *TreeNode {
 	var lr int
@@ -70,7 +71,7 @@ func s2t(s []int) *TreeNode {
 		if i < ms && s[i] > 0 {
 			tmp.Right = &TreeNode{Val: s[i]}
 		}
-		tmp =
+		tmp = nil
 	}
 	return t
 }
