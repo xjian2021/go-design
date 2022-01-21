@@ -44,7 +44,7 @@ func SliceToTreeNode(s []int) *TreeNode {
 				treeNodes[i-2] = nil
 			default:
 				j := i - 4
-				for ; treeNodes[j] == nil; j-- {
+				for ; j >= 0 && treeNodes[j] == nil; j-- {
 				}
 				if j < 0 {
 					panic("数组不构成树")
