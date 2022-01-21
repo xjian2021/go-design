@@ -2,28 +2,24 @@ package main
 
 import (
 	"fmt"
-	"os"
-	"time"
-
-	"github.com/davecgh/go-spew/spew"
 
 	. "github.com/xjian2021/go-design/leetcode/pkg"
 )
 
 // 中序遍历二叉树
 func main() {
-	after := time.After(1 * time.Second)
-	go func() {
-		select {
-		case <-after:
-			fmt.Println("time out")
-			os.Exit(10086)
-		}
-	}()
+	//after := time.After(1 * time.Second)
+	//go func() {
+	//	select {
+	//	case <-after:
+	//		fmt.Println("time out")
+	//		os.Exit(10086)
+	//	}
+	//}()
 	root := []int{3, 2, 4, 0, 0, 1}
 	t := SliceToTreeNode(root)
 	//t := NewTreeNode(3, NewTreeNode(2, NewTreeNode(4, nil, nil), NewTreeNode(1, nil, nil)), nil)
-	spew.Dump(t)
+	t.EchoTreeNode()
 	s := inorderTraversalByMorris(t)
 	fmt.Println(s)
 }
