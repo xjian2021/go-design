@@ -28,33 +28,21 @@ func (t *TreeNode) EchoTreeNode() {
 //SliceToTreeNode 前序遍历方式生成树
 func SliceToTreeNode(s []int) *TreeNode {
 	t := &TreeNode{}
-	tmp := t
-	ms := len(s)
+	tmp, ms, skip := t, len(s), 0
 	if ms == 0 {
 		return nil
 	}
-	var treeNodes []*TreeNode
+	treeNodes := make([]*TreeNode, ms)
 	for i := 0; i < ms; i++ {
-		var node *TreeNode
 		if s[i] > 0 {
-			node = &TreeNode{Val: s[i]}
-		}
-		treeNodes = append(treeNodes, node)
-	}
-	if treeNodes == nil {
-		panic("数组不构成树")
-	}
-	var skip int
-	for i := 0; i < ms; i++ {
-		no := treeNodes[i]
-		if s[i] > 0 {
+			treeNodes[i] = &TreeNode{Val: s[i]}
 			switch skip {
 			case 0:
-				tmp.Left = no
+				tmp.Left = treeNodes[i]
 			case 1:
-				tmp.Right = no
+				tmp.Right = treeNodes[i]
 				treeNodes[i-2] = nil
-			default: // skip > 2
+			default:
 				j := i - 4
 				for ; treeNodes[j] == nil; j-- {
 				}
@@ -62,10 +50,10 @@ func SliceToTreeNode(s []int) *TreeNode {
 					panic("数组不构成树")
 				}
 				tmp = treeNodes[j]
-				tmp.Right = no
+				tmp.Right = treeNodes[i]
 				treeNodes[j] = nil
 			}
-			tmp = no
+			tmp = treeNodes[i]
 			skip = 0
 		} else {
 			skip++
