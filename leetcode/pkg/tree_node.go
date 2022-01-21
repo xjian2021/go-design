@@ -62,6 +62,29 @@ func SliceToTreeNode(s []int) *TreeNode {
 			}
 		}
 	}
-
 	return t.Left
+}
+
+//InorderTraversalByMorris 中序遍历式树转数组
+func InorderTraversalByMorris(root *TreeNode) (res []int) {
+	for root != nil {
+		if root.Left != nil {
+			predecessor := root.Left
+			for predecessor.Right != nil && predecessor.Right != root {
+				predecessor = predecessor.Right
+			}
+			if predecessor.Right == root {
+				res = append(res, root.Val)
+				predecessor.Right = nil
+				root = root.Right
+			} else {
+				predecessor.Right = root
+				root = root.Left
+			}
+		} else {
+			res = append(res, root.Val)
+			root = root.Right
+		}
+	}
+	return res
 }
