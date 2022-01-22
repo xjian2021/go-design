@@ -34,7 +34,7 @@ func SliceToTreeNode(s []int) *TreeNode {
 	}
 	treeNodes := make([]*TreeNode, ms)
 	for i := 0; i < ms; i++ {
-		if s[i] > 0 {
+		if s[i] >= 0 {
 			treeNodes[i] = &TreeNode{Val: s[i]}
 			switch skip {
 			case 0:

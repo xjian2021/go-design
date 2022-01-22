@@ -16,7 +16,7 @@ func main() {
 	//		os.Exit(10086)
 	//	}
 	//}()
-	root := []int{3, 2, 4, 0, 0, 1}
+	root := []int{3, 2, 4, -1, -1, 1}
 	t := SliceToTreeNode(root)
 	//t := NewTreeNode(3, NewTreeNode(2, NewTreeNode(4, nil, nil), NewTreeNode(1, nil, nil)), nil)
 	t.EchoTreeNode()
