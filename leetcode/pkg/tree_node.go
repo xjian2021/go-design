@@ -5,6 +5,10 @@ import (
 	"fmt"
 )
 
+const (
+	NULL = -1
+)
+
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode

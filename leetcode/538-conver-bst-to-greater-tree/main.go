@@ -13,7 +13,7 @@ import (
 //节点的右子树仅包含键 大于 节点键的节点。
 //左右子树也必须是二叉搜索树。
 func main() {
-	n := []int{4, 1, 0, -1, -1, 2, -1, 3, -1, -1, 6, 5, -1, -1, 7, -1, 8}
+	n := []int{4, 1, 0, NULL, NULL, 2, NULL, 3, NULL, NULL, 6, 5, NULL, NULL, 7, NULL, 8}
 	root := SliceToTreeNode(n)
 	t := convertBST(root)
 	t.EchoTreeNode()
