@@ -70,6 +70,7 @@ func SliceToTreeNode(s []int) *TreeNode {
 }
 
 //InorderTraversalByMorris 中序遍历式树转数组
+// 用于把树转换成数组 使之更好观察
 func InorderTraversalByMorris(root *TreeNode) (res []int) {
 	for root != nil {
 		if root.Left != nil {
