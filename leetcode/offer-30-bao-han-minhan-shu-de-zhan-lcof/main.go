@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 //剑指 Offer 30. 包含min函数的栈
 //定义栈的数据结构，请在该类型中实现一个能够得到栈的最小元素的 min 函数在该栈中，调用 min、push 及 pop 的时间复杂度都是 O(1)。
@@ -33,17 +36,15 @@ type MinStack struct {
 func Constructor() MinStack {
 	return MinStack{
 		valArr: []int{},
-		minArr: []int{},
+		minArr: []int{math.MaxInt},
 	}
 }
 
 func (this *MinStack) Push(x int) {
 	min := x
 	this.valArr = append(this.valArr, x)
-	if len(this.minArr) > 0 {
-		if x > this.minArr[len(this.minArr)-1] {
-			min = this.minArr[len(this.minArr)-1]
-		}
+	if x > this.minArr[len(this.minArr)-1] {
+		min = this.minArr[len(this.minArr)-1]
 	}
 	this.minArr = append(this.minArr, min)
 }
