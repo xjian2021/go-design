@@ -18,7 +18,7 @@ func main() {
 	fmt.Println("输入：")
 	node.EchoNode()
 	fmt.Println("输出：")
-	newNode := copyRandomList(node)
+	newNode := copyRandomList1(node)
 	newNode.EchoNode()
 }
 
@@ -120,4 +120,28 @@ func getNodeIndex(head *Node, target *Node) int {
 		index++
 	}
 	return null
+}
+
+var cacheNode map[*Node]*Node
+
+func copyRandomList1(head *Node) *Node {
+	cacheNode = make(map[*Node]*Node)
+	return deepCopy(head)
+}
+
+//递归获取节点的深度拷贝节点
+//f(node): 获取node为根节点的深度拷贝节点
+//f(node)=生成node的拷贝节点(包含node的val+node的next的拷贝节点+node的random的拷贝节点)，并把拷贝节点缓存到全局map中
+func deepCopy(node *Node) *Node {
+	if node == nil {
+		return node
+	}
+	if n, has := cacheNode[node]; has {
+		return n
+	}
+	newNode := &Node{Val: node.Val}
+	cacheNode[node] = newNode
+	newNode.Next = deepCopy(node.Next)
+	newNode.Random = deepCopy(node.Random)
+	return newNode
 }
