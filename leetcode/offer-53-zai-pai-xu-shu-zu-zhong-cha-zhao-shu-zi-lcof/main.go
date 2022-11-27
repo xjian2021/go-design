@@ -6,7 +6,8 @@ import "fmt"
 //统计一个数字在排序数组中出现的次数。
 
 func main() {
-	fmt.Println(search([]int{5, 7, 7, 8, 8, 10}, 8))
+	//fmt.Println(search([]int{5, 7, 7, 8, 8, 10}, 8))
+	fmt.Println(missingNumber([]int{0}))
 }
 
 func search(nums []int, target int) int {
@@ -29,4 +30,15 @@ func search(nums []int, target int) int {
 //TODO 二分法
 func search1(nums []int, target int) int {
 	return 0
+}
+
+//剑指 Offer 53 - II. 0～n-1中缺失的数字
+//一个长度为n-1的递增排序数组中的所有数字都是唯一的，并且每个数字都在范围0～n-1之内。在范围0～n-1内的n个数字中有且只有一个数字不在该数组中，请找出这个数字。
+func missingNumber(nums []int) int {
+	for i, num := range nums {
+		if i != num {
+			return i
+		}
+	}
+	return len(nums)
 }
