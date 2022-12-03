@@ -6,10 +6,13 @@ import "fmt"
 //统计一个数字在排序数组中出现的次数。
 
 func main() {
+	nums := []int{5, 7, 7, 8, 9, 10}
 	//fmt.Println(search([]int{5, 7, 7, 8, 8, 10}, 8))
-	fmt.Println(missingNumber([]int{0}))
+	//fmt.Println(missingNumber([]int{0}))
+	fmt.Println(search1(nums, 7))
 }
 
+// 暴力法
 func search(nums []int, target int) int {
 	if len(nums) == 0 || nums[0] > target || nums[len(nums)-1] < target {
 		return 0
@@ -27,9 +30,23 @@ func search(nums []int, target int) int {
 	return i
 }
 
-//TODO 二分法
+// 二分法
+func searchBoundary(nums []int, l, r, target int) int {
+	for l <= r {
+		middle := l + (r-l)>>1
+		if nums[middle] < target {
+			l = middle + 1
+		} else {
+			r = middle - 1
+		}
+	}
+	return l
+}
+
 func search1(nums []int, target int) int {
-	return 0
+	li := searchBoundary(nums, 0, len(nums)-1, target)
+	ri := searchBoundary(nums, li, len(nums)-1, target+1)
+	return ri - li
 }
 
 //剑指 Offer 53 - II. 0～n-1中缺失的数字
