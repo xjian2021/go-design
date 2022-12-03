@@ -15,7 +15,7 @@ func main() {
 	}
 	//m := [][]int{{1, 4, 7, 11, 15}, {2, 5, 8, 12, 19}, {3, 6, 9, 16, 22}, {10, 13, 14, 17, 24}, {18, 21, 23, 26, 30}}
 	for i := 0; i <= 30; i++ {
-		fmt.Println("二分：", i, findNumberIn2DArray1(m, i))
+		fmt.Println("二分：", i, findNumberIn2DArray2(m, i))
 		fmt.Println("暴力：", i, findNumberIn2DArray(m, i))
 		//fmt.Println(findNumberIn2DArray1(m, 5))
 	}
@@ -79,7 +79,31 @@ func findNumberIn2DArray1(matrix [][]int, target int) bool {
 	return false
 }
 
-// TODO z字抖动
+/*
+[
+  [1,   4,  7, 11, 15],
+  [2,   5,  8, 12, 19],
+  [3,   6,  9, 16, 22],
+  [10, 13, 14, 17, 24],
+  [18, 21, 23, 26, 30]
+]
+*/
+// z字抖动
 func findNumberIn2DArray2(matrix [][]int, target int) bool {
+	if len(matrix) == 0 {
+		return false
+	}
+	portrait, y := len(matrix), len(matrix[0])-1
+	var x int
+	for x < portrait && y >= 0 {
+		switch {
+		case matrix[x][y] > target:
+			y--
+		case matrix[x][y] < target:
+			x++
+		case matrix[x][y] == target:
+			return true
+		}
+	}
 	return false
 }
