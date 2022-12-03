@@ -13,7 +13,14 @@ func main() {
 		{10, 13, 14, 17, 24},
 		{18, 21, 23, 26, 30},
 	}
-	fmt.Println(findNumberIn2DArray(m, 5))
+	//m := [][]int{{1, 4, 7, 11, 15}, {2, 5, 8, 12, 19}, {3, 6, 9, 16, 22}, {10, 13, 14, 17, 24}, {18, 21, 23, 26, 30}}
+	for i := 0; i <= 30; i++ {
+		fmt.Println("二分：", i, findNumberIn2DArray1(m, i))
+		fmt.Println("暴力：", i, findNumberIn2DArray(m, i))
+		//fmt.Println(findNumberIn2DArray1(m, 5))
+	}
+
+	//fmt.Println(inArray1(m[0], 1))
 }
 
 /*
@@ -24,15 +31,6 @@ func main() {
   [10, 13, 14, 17, 24],
   [18, 21, 23, 26, 30]
 ]
-
-[
-  [1,	4,	7,	11,	15],
-  [2,	5,	8,	12,	19],
-  [3,	6,	9,	16,	22],
-  [10,	13,	14,	17,	24],
-  [18,	21,	23,	26,	30]
-]
-
 */
 // 暴力法
 func findNumberIn2DArray(matrix [][]int, target int) bool {
@@ -50,6 +48,38 @@ func findNumberIn2DArray(matrix [][]int, target int) bool {
 }
 
 // 二分法
+//思路：f(n)=f(n/2)+n/2纵向二分   其实横着二分跟纵向二分一样
 func findNumberIn2DArray1(matrix [][]int, target int) bool {
-	return true
+	if len(matrix) == 0 {
+		return false
+	}
+	for i, row := range matrix[0] {
+		if row > target {
+			break
+		}
+		if row == target {
+			return true
+		}
+		l, r := 0, len(matrix)
+		if matrix[r-1][i] < target {
+			continue
+		}
+		for l <= r {
+			middle := (l + r) >> 1
+			switch {
+			case matrix[middle][i] == target:
+				return true
+			case matrix[middle][i] < target:
+				l = middle + 1
+			default:
+				r = middle - 1
+			}
+		}
+	}
+	return false
+}
+
+// TODO z字抖动
+func findNumberIn2DArray2(matrix [][]int, target int) bool {
+	return false
 }
